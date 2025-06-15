@@ -119,7 +119,9 @@ Model ini didesain untuk **penggunaan lokal dan edukasi**, dengan konteks penggu
 
 ## 👤 Author
 
-**Dimas Firmansyah**  
+**Dimas Firmansyh**
+**Aditya Putra Wijaya**
+**Mohamad Mahdi Alethea**
 Program Studi Teknik Informatika  
 Tugas Data Mining 2025
 
