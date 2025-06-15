@@ -18,51 +18,48 @@ Dalam sistem keuangan modern, pencucian uang menjadi tantangan serius. Dengan pe
 ## 📁 Struktur Proyek
 
 ```
-├── model
-    ├── fraud_model.pkl           # Model Logistic Regression
-    ├── scaler.pkl                # Objek StandardScaler
-    ├── label_encoder.pkl         # Encoder untuk kolom 'type'
-├── dummy_input.csv           # Contoh data dummy (20 transaksi)
-├── predict_csv.py            # Script untuk prediksi batch
-├── predict.py                # Script untuk prediksi personal
-├── AML.ipynb                 # file note book untuk pelatihan model
-├── README.md                 # Dokumen ini
+├── model/
+│   ├── fraud_model.pkl           # Model Logistic Regression
+│   ├── scaler.pkl                # Objek StandardScaler
+│   ├── label_encoder.pkl         # Encoder untuk kolom 'type'
+├── dummy_input.csv               # Contoh data dummy (20/100 transaksi)
+├── predict_csv.py                # Script untuk prediksi batch (terminal)
+├── predict.py                    # Script untuk prediksi personal (terminal)
+├── AML.ipynb                     # Notebook pelatihan model
+├── app.py                        # Aplikasi Streamlit
+├── README.md                     # Dokumen ini
 ```
 
 ---
 
 ## ⚙️ Cara Menjalankan
 
-### 1. Persiapan
-Install package yang dibutuhkan:
+### 1. Instalasi Dependensi
+
 ```bash
-pip install pandas scikit-learn imbalanced-learn joblib
+pip install pandas scikit-learn imbalanced-learn joblib streamlit plotly
 ```
 
-### 2. Menjalankan Prediksi Manual
-Jalankan script `predict.py`, pastikan file model (`*.pkl`) ada di direktori yang sama:
+### 2. Menjalankan Aplikasi Streamlit
+
 ```bash
-python predict.py
+streamlit run app.py
 ```
 
-Contoh pemanggilan fungsi:
-```python
-predict_fraud(
-    transaction_type='TRANSFER',
-    amount=700000.0,
-    oldbalanceOrg=900000.0,
-    newbalanceOrig=0.0,
-    oldbalanceDest=0.0,
-    newbalanceDest=900000.0,
-    count_txn_by_orig=20,
-    sum_txn_by_orig=5000000.0,
-    avg_amount_by_orig=250000.0,
-    count_unique_dest=10,
-    count_txn_by_dest=3
-)
-```
+Aplikasi akan berjalan di:  
+👉 `http://localhost:8501`
 
-Atau jalankan `predict_batch_from_csv('dummy_input.csv')` untuk memproses banyak data sekaligus.
+---
+
+## 🧾 Fitur Aplikasi Streamlit
+
+| Tab                     | Fitur                                                                 |
+|------------------------|------------------------------------------------------------------------|
+| **📝 Input Manual**     | Form input untuk memeriksa 1 transaksi secara manual                   |
+| **📁 Upload CSV**       | Upload file CSV dan deteksi fraud secara batch                        |
+| **📊 Visualisasi**      | Menampilkan pie chart hasil klasifikasi (Aman vs Mencurigakan)        |
+| **📥 Download Hasil**   | Export hasil prediksi dalam bentuk CSV                                |
+| **❓ Bantuan**           | Penjelasan label, format input, dan template CSV                      |
 
 ---
 
@@ -97,34 +94,33 @@ Atau jalankan `predict_batch_from_csv('dummy_input.csv')` untuk memproses banyak
 
 ---
 
-## 📁 Contoh Dummy Data (`dummy_input.csv`)
+## 📁 Template CSV (Wajib)
 
-```csv
-transaction_type,amount,oldbalanceOrg,newbalanceOrig,oldbalanceDest,newbalanceDest,count_txn_by_orig,sum_txn_by_orig,avg_amount_by_orig,count_unique_dest,count_txn_by_dest
-TRANSFER,700000,900000,0,0,900000,20,5000000,250000,10,3
-PAYMENT,12000,13000,1000,0,0,10,120000,12000,5,0
-...
+File CSV harus memiliki kolom berikut:
+
 ```
+transaction_type,amount,oldbalanceOrg,newbalanceOrig,oldbalanceDest,newbalanceDest,count_txn_by_orig,sum_txn_by_orig,avg_amount_by_orig,count_unique_dest,count_txn_by_dest
+```
+
+✅ Contoh tersedia dalam `dummy_input.csv`
 
 ---
 
 ## 🇮🇩 Catatan Lokal
 
-Model ini didesain untuk **penggunaan lokal dan edukasi**, dengan konteks pengguna di Indonesia. Untuk keperluan produksi/nyata:
-- Precision harus ditingkatkan untuk mengurangi false positive.
-- Model bisa diganti atau ditingkatkan menggunakan XGBoost atau Random Forest.
-- Sistem bisa diintegrasikan ke API/Frontend untuk otomasi.
+Aplikasi ini dikembangkan dengan pertimbangan:
+- **Bahasa Indonesia** untuk antar muka
+- **Visualisasi modern** (Plotly)
+- **Format edukatif** bagi mahasiswa atau pemula dalam deteksi fraud
 
 ---
 
 ## 👤 Author
 **Kelompok 9**
 
-**Dimas Firmansyh (312210267)**
-
-**Aditya Putra Wijaya (312210207)**
-
-**Mohamad Mahdi Alethea (312210195)**
+- **Dimas Firmansyah (312210267)**
+- **Aditya Putra Wijaya (312210207)**
+- **Mohamad Mahdi Alethea (312210195)**
 
 Program Studi Teknik Informatika  
 Tugas Data Mining 2025
