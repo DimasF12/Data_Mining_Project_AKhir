@@ -106,6 +106,39 @@ transaction_type,amount,oldbalanceOrg,newbalanceOrig,oldbalanceDest,newbalanceDe
 
 ---
 
+## 🔁 Alur Pemrosesan Data (Processing Workflow)
+```
+[DATA TRANSAKSI MENTAH (Kaggle)]
+│
+▼
+[PRA-PEMROSESAN DATA]
+- Feature Engineering
+- Encoding Kategorikal (LabelEncoder)
+- Penskalaan Fitur (StandardScaler)
+│
+▼
+[PENANGANAN IMBALANCE DATA]
+- SMOTE (pada data latih)
+│
+▼
+[PELATIHAN MODEL]
+- Split Data (Train/Test)
+- Model Logistic Regression
+│
+▼
+[EVALUASI MODEL]
+- Metrik: Accuracy, ROC AUC, Recall, Precision
+│
+▼
+[PREDIKSI TRANSAKSI BARU] <── [INPUT TRANSAKSI BARU (Manual / CSV)]
+- Pra-pemrosesan (menggunakan scaler & encoder tersimpan)
+│
+▼
+[HASIL KLASIFIKASI]
+- Aman / Mencurigakan (Fraud)
+- Probabilitas
+```
+
 ## 🇮🇩 Catatan Lokal
 
 Aplikasi ini dikembangkan dengan pertimbangan:
